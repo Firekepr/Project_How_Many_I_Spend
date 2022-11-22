@@ -116,6 +116,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  page_transition:
+    dependency: "direct main"
+    description:
+      name: page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
   path:
     dependency: transitive
     description:
@@ -193,6 +207,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.4"
   simple_gesture_detector:
     dependency: transitive
     description:
