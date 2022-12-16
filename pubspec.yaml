@@ -41,6 +41,8 @@ dependencies:
   intl: ^0.17.0 #https://pub.dev/packages/intl
   page_transition: ^2.0.9 #https://pub.dev/packages/page_transition
   provider: ^6.0.3 # https://pub.dev/packages/provider
+  modal_bottom_sheet: ^2.1.2
+  brasil_fields: ^1.8.1 #https://pub.dev/packages/brasil_fields
 
 dev_dependencies:
   flutter_test:

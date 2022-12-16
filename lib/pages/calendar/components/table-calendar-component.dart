@@ -9,6 +9,7 @@ class TableCalendarComponent extends StatelessWidget {
   final DateTime daySpotlight;
   final DateTime monthFirstDay;
   final void Function(DateTime selectDay, DateTime focusDay) onDaySelected;
+  final void Function(DateTime selectDay, DateTime focusDay) onDayLongPressed;
   final void Function(DateTime firstDay) onChangeMonth;
   final bool minSize;
 
@@ -19,6 +20,7 @@ class TableCalendarComponent extends StatelessWidget {
     required this.monthFirstDay,
     required this.onDaySelected,
     required this.onChangeMonth,
+    required this.onDayLongPressed,
     required this.minSize,
   }) : super(key: key);
 
@@ -42,6 +44,7 @@ class TableCalendarComponent extends StatelessWidget {
       availableCalendarFormats: availableCalendarFormats,
       onDaySelected: onDaySelected,
       onPageChanged: onChangeMonth,
+      onDayLongPressed: onDayLongPressed,
 
       //Controls calendar size:
       daysOfWeekHeight: minSize ? 16.0 : 18.0,

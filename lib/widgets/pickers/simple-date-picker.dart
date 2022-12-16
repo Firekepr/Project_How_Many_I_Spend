@@ -7,10 +7,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class SimpleDatePicker extends StatefulWidget {
 
   final void Function(DateTime dateTime) onSelectDate;
+  final DateTime initialDateTime;
 
   const SimpleDatePicker({
     Key? key,
     required this.onSelectDate,
+    required this.initialDateTime,
   }) : super(key: key);
 
   @override
@@ -24,15 +26,22 @@ class _SimpleDatePickerState extends State<SimpleDatePicker> {
   String formattedDate = '';
 
   @override
+  void initState() {
+    formattedDate = formatter.format(widget.initialDateTime);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => _selectDate(context),
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
           border: Border.all(
-            color: ColorsService.graphiteColor,
-            width: 0.5,
+            color: Colors.blueGrey,
+            width: 1.0,
           ),
         ),
         child: Row(
@@ -58,6 +67,7 @@ class _SimpleDatePickerState extends State<SimpleDatePicker> {
         initialDate: DateTime.now(),
         firstDate: DateTime(2019, 8),
         lastDate: DateTime(2101),
+        initialEntryMode: DatePickerEntryMode.calendarOnly
     );
 
     if (picked != null && picked != selectedDate) {

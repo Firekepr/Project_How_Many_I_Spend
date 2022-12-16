@@ -22,7 +22,6 @@ class _CalendarState extends State<Calendar> {
         builder: (BuildContext calendarContext, ProviderCalendar values, Widget? child) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
-              // onPressed: _selectDate,
                 onPressed: () {
                   _cS.addNewEventModal(context);
                   },
@@ -33,6 +32,7 @@ class _CalendarState extends State<Calendar> {
               monthFirstDay: monthFirstDay(),
               onDaySelected: _onDaySelected,
               onChangeMonth: _onChangeMonth,
+              onDayLongPressed: onLongDayPressed,
               minSize: false,
             ),
           );
@@ -64,6 +64,11 @@ class _CalendarState extends State<Calendar> {
     DateTime today = DateTime.parse('2019-01-01');
 
     return today;
+  }
+
+  void onLongDayPressed(DateTime dayOne, DateTime dayTwo) {
+    // _cS.adddNewEventModal(dayOne, dayTwo, context);
+    _cS.addNewEventBottomSheet(dayOne, dayTwo, context);
   }
 
   Future<void> _selectDate() async {
