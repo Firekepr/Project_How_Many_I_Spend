@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Intl.defaultLocale = 'pt_BR';
-  initializeDateFormatting('pt_BR', null).then((_) =>
+  // initializeDateFormatting('pt_BR', null).then((_) =>
       runApp(
         MultiProvider(
           providers: [
@@ -21,6 +21,6 @@ void main() async {
           ],
           child: const MyApp(),
         ),
-      ),
-  );
+      );
+  // );
 }
