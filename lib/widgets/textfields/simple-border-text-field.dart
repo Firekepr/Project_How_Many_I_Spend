@@ -40,24 +40,27 @@ class _SimpleBorderTexFieldState extends State<SimpleBorderTexField> {
               ),
           ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 16.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: TextFormField(
           keyboardType: widget.inputType ?? TextInputType.text,
           autofocus: false,
           expands: false,
           maxLines: 5,
           minLines: 1,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black,),
           inputFormatters: widget.formatMoney
               ? <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly,
                       CentavosInputFormatter(moeda: true),
                 ]
               : null,
+          textAlign: TextAlign.left,
           decoration: InputDecoration(
             hintStyle: const TextStyle(color: Colors.grey),
             border: InputBorder.none,
             hintText: widget.hintText,
+            contentPadding: const EdgeInsets.all(12.0),
+            isDense: true,
           ),
           controller: widget.controller,
         ),

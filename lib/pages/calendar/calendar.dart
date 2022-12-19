@@ -23,7 +23,7 @@ class _CalendarState extends State<Calendar> {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  _cS.addNewEventModal(context);
+                  _cS.addNewEventModal(context, null);
                   },
             ),
             body: TableCalendarComponent(
@@ -32,7 +32,7 @@ class _CalendarState extends State<Calendar> {
               monthFirstDay: monthFirstDay(),
               onDaySelected: _onDaySelected,
               onChangeMonth: _onChangeMonth,
-              onDayLongPressed: onLongDayPressed,
+              onDayLongPressed: _onLongDayPressed,
               minSize: false,
             ),
           );
@@ -41,6 +41,11 @@ class _CalendarState extends State<Calendar> {
   }
 
   void _onDaySelected(DateTime dayOne, DateTime dayTwo) {
+
+    if (Global.scaleMonthSelected == dayOne) {
+      _onLongDayPressed(Global.scaleMonthSelected, dayTwo);
+    }
+
     Global.scaleMonthSelected = dayOne;
     Global.selectedDay = dayOne;
     _updateScaleList(dayOne);
@@ -66,9 +71,8 @@ class _CalendarState extends State<Calendar> {
     return today;
   }
 
-  void onLongDayPressed(DateTime dayOne, DateTime dayTwo) {
-    // _cS.adddNewEventModal(dayOne, dayTwo, context);
-    _cS.addNewEventBottomSheet(dayOne, dayTwo, context);
+  void _onLongDayPressed(DateTime dayOne, DateTime dayTwo) {
+    _cS.addNewEventModal(context, dayOne);
   }
 
   Future<void> _selectDate() async {

@@ -3,8 +3,6 @@ import 'package:how_many_i_spend/database/database.dart';
 import 'package:how_many_i_spend/widgets/dialogs/calendar-add-dialog.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../widgets/bottom-sheets/add-bottom-sheet.dart';
-
 class CalendarService {
 
   final DatabaseHelper _db = DatabaseHelper.instance;
@@ -17,14 +15,14 @@ class CalendarService {
 
   }
 
-  addNewEventModal(BuildContext context) {
+  addNewEventModal(BuildContext context, DateTime? selectDate) {
 
     showDialog(
       context: context,
       // barrierDismissible: false,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
-        return CalendarAddDialog(initialDateTime: DateTime.now(),);
+        return CalendarAddDialog(initialDateTime: selectDate ??  DateTime.now(),);
       },
     );
 
@@ -43,21 +41,6 @@ class CalendarService {
       },
     );
 
-  }
-
-  addNewEventBottomSheet(DateTime time, DateTime time2, BuildContext context) {
-
-    return showMaterialModalBottomSheet(
-        context: context,
-        // expand: true,
-        enableDrag: true,
-        bounce: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        builder: (context) => AddBottomSheet(initialDateTime: time),
-
-    );
   }
 
   // Future selectDate(BuildContext context) async {

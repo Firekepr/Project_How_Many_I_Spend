@@ -8,7 +8,9 @@ class DataBaseTables {
     date text,
     type text,
     parcel integer DEFAULT 0,
-    description text
+    description text,
+    local text,
+    spending text
   ) ''';
 
   static const String currentUser = ''' 
