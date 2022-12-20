@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/pages/home/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:how_many_i_spend/provider/provider-system.dart';
+import 'package:how_many_i_spend/services/app_theme_service.dart';
+import 'package:how_many_i_spend/services/global-context.dart';
+import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
 
@@ -8,23 +12,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return Consumer<ProviderSystem>(
+      builder: (BuildContext context, ProviderSystem val, Widget? child) {
+        return MaterialApp(
+          navigatorKey: GlobalContextKey.navigatorKey,
+          title: 'Flutter Demo',
 
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        // Locale('en', ''),
-        Locale('pt', ''),
-      ],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            // Locale('en', ''),
+            Locale('pt', ''),
+          ],
 
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
+          theme: val.theme ? AppTheme.lightTheme : AppTheme.darkTheme,
+          home: const Home(),
+        );
+      },
     );
   }
 }
