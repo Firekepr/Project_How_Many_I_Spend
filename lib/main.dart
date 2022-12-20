@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:how_many_i_spend/services/provider-calendar.dart';
+import 'package:how_many_i_spend/provider/provider-calendar.dart';
+import 'package:how_many_i_spend/provider/provider-system.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -15,6 +16,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<ProviderCalendar>(
           create: (_) => ProviderCalendar(),
+        ),
+        ChangeNotifierProvider<ProviderSystem>(
+          create: (_) => ProviderSystem(),
         ),
       ],
       child: const MyApp(),
