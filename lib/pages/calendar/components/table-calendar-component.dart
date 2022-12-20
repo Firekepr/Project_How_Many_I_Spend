@@ -62,62 +62,46 @@ class TableCalendarComponent extends StatelessWidget {
             if (events.isNotEmpty) {
               final UtilsService _utils = UtilsService();
 
-              Color colorWithCheckIn = ColorsService.lightGreenScale;
-              Color colorWithoutCheckIn = ColorsService.deepRedScale;
-              Color colorWithoutCheckout = ColorsService.lightBlueScale;
-              Color colorWithoutConfirm = ColorsService.lightYellowScale;
-              Color colorFutureConfirmed = ColorsService.deepBlueScale;
+              Color colorDebit = ColorsService.deepRedScale;
+              Color colorCredit = Colors.orange;
+              Color colorMoney = Colors.green;
+              Color colorPix = ColorsService.deepBlueScale;
 
-              int scaleComplete = 0;
-              int scaleWithoutCheckIn = 0;
-              int scaleWithoutCheckout = 0;
-              int scaleNeedConfirm = 0;
-              int scaleFutureConfirmed = 0;
+              int debitItem = 0;
+              int itemCredit = 0;
+              int itemMoney = 0;
+              int itemPix = 0;
 
               for (var element in events) {
-                if (_utils.now().isAfter(_utils.transformStringToDateWithoutHourAndNow(element.dt_item))) {
-                  if (element.dt_checkin.isEmpty) {
-                    scaleWithoutCheckIn += 1;
-                  } else if (element.dt_checkout.isEmpty) {
-                    scaleWithoutCheckout += 1;
-                  } else {
-                    scaleComplete += 1;
-                  }
-
-                } else if (element.fl_mostrar_botao_confirmar && !element.fl_profissional_aceite) {
-                  scaleNeedConfirm += 1;
-                } else if (!element.fl_mostrar_botao_confirmar && !element.fl_profissional_aceite
-                    ||!element.fl_mostrar_botao_confirmar && element.fl_profissional_aceite
-                    || element.fl_mostrar_botao_confirmar && !element.fl_profissional_aceite
-                    || element.fl_mostrar_botao_confirmar && element.fl_profissional_aceite){
-                  scaleFutureConfirmed += 1;
-                } else {
-                  scaleComplete += 1;
+                if (element.type == 'Débito') {
+                  debitItem += 1;
+                } else if (element.type == 'Crédito') {
+                  itemCredit += 1;
+                } else if (element.type == 'Dinheiro') {
+                  itemMoney += 1;
+                }  else {
+                  itemPix += 1;
                 }
               }
-              if (scaleWithoutCheckIn != 0) {
-                item.add(scaleWithoutCheckIn);
-                itemColor.add(colorWithoutCheckIn);
+
+              if (debitItem != 0) {
+                item.add(debitItem);
+                itemColor.add(colorDebit);
               }
 
-              if (scaleWithoutCheckout > 0) {
-                item.add(scaleWithoutCheckout);
-                itemColor.add(colorWithoutCheckout);
+              if (itemCredit > 0) {
+                item.add(itemCredit);
+                itemColor.add(colorCredit);
               }
 
-              if (scaleComplete > 0) {
-                item.add(scaleComplete);
-                itemColor.add(colorWithCheckIn);
+              if (itemMoney > 0) {
+                item.add(itemMoney);
+                itemColor.add(colorMoney);
               }
 
-              if (scaleNeedConfirm > 0) {
-                item.add(scaleNeedConfirm);
-                itemColor.add(colorWithoutConfirm);
-              }
-
-              if (scaleFutureConfirmed > 0) {
-                item.add(scaleFutureConfirmed);
-                itemColor.add(colorFutureConfirmed);
+              if (itemPix > 0) {
+                item.add(itemPix);
+                itemColor.add(colorPix);
               }
             }
 
@@ -238,7 +222,7 @@ class TableCalendarComponent extends StatelessWidget {
   }
 
   List<dynamic> _getEvents(DateTime date) {
-    DateTime day = DateTime.parse(date.toString().substring(0, date.toString().length - 1));
+    DateTime day = DateTime.parse(date.toString().substring(0, date.toString().length - 14));
 
     return events[day] ?? [];
   }

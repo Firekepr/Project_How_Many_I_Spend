@@ -3,11 +3,11 @@ import 'dart:core';
 class DataBaseTables {
 
   static const String calendarEvents = ''' 
-  CREATE TABLE mov_calendar_itens(
+  CREATE TABLE mov_calendar_items(
     id integer PRIMARY KEY AUTOINCREMENT,
     date text,
     type text,
-    parcel integer DEFAULT 0,
+    parcel text,
     description text,
     local text,
     spending text

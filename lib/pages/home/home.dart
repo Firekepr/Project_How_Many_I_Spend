@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:how_many_i_spend/services/calendar-service.dart';
 import 'package:how_many_i_spend/services/pages-service.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeState extends State<Home> {
   void initState() {
     _pageController = PageController(keepPage: false);
     _pageList = getPages(_pageController, _goBack);
+    _initializeScale();
     super.initState();
   }
 
@@ -52,5 +54,11 @@ class _HomeState extends State<Home> {
     if (!currentFocus.hasPrimaryFocus) {
       FocusScope.of(context).requestFocus(FocusNode());
     }
+  }
+
+  Future<void> _initializeScale() async {
+    final CalendarService _service = CalendarService();
+
+    await _service.updateCalendarEventList();
   }
 }

@@ -1,6 +1,6 @@
 class CalendarStrings {
 
-  static const String amountSpend = 'Valor gasto:';
+  static const String amountSpend = 'Valor gasto (obrigatório):';
   static const String cancel = 'Cancelar';
   static const String conclude = 'Concluir';
   static const String newRegister = 'Nova compra';
