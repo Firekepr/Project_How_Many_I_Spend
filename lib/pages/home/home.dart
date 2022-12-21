@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/services/calendar-service.dart';
 import 'package:how_many_i_spend/services/pages-service.dart';
 
+import '../../global.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -59,6 +61,8 @@ class _HomeState extends State<Home> {
   Future<void> _initializeScale() async {
     final CalendarService _service = CalendarService();
 
+    Global.selectedDay = DateTime.now();
     await _service.updateCalendarEventList();
+    await _service.updateCalendarEventListDay();
   }
 }

@@ -57,11 +57,16 @@ class CalendarService {
     }
 
     Map<DateTime, List<dynamic>> result = {
-      for (var value in dates) value : _getDayCalendar(value)
+      for (var value in dates) value : getDayCalendar(value)
     };
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         getProvider(GlobalContextKey.get()!).setEventListResult(result));
+  }
+
+  Future<void> updateCalendarEventListDay() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        getProvider(GlobalContextKey.get()!).setCalendarDayListItems(getDayCalendar(DateTime.now())));
   }
 
   Future<void> _updateCalendarItemsProvider() async {
@@ -81,7 +86,7 @@ class CalendarService {
     getProvider(GlobalContextKey.get()!).setCalendarItems(returnList);
   }
 
-  List<CalendarItems> _getDayCalendar(DateTime dateParam) {
+  List<CalendarItems> getDayCalendar(DateTime dateParam) {
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     List<CalendarItems> responseList = [];
 

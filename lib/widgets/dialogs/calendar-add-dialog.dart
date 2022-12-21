@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../provider/provider-system.dart';
-import '../../services/colors-service.dart';
 import '../../strings/calendar-strings.dart';
+import '../../styles/custom-colors.dart';
 import '../buttons/form-simple-text-button.dart';
 import '../dropdown/Form-drop-down.dart';
 import '../textfields/forms-simple-border-text-field.dart';
@@ -231,6 +231,10 @@ class _CalendarAddDialogState extends State<CalendarAddDialog> {
       _form.control('description').value = 'Compras';
     }
 
+    if (_form.control('local').value == '') {
+      _form.control('local').value = 'Não informado';
+    }
+
     await service.addNewEvent(_form.value);
 
     Navigator.of(context).pop();
@@ -241,22 +245,22 @@ class _CalendarAddDialogState extends State<CalendarAddDialog> {
       {
         'icon': MdiIcons.creditCardFast,
         'title': 'Débito',
-        'color': Colors.red,
+        'color': ColorsService.debitColor,
       },
       {
         'icon': MdiIcons.creditCardClock,
         'title': 'Crédito',
-        'color': Colors.orange,
+        'color': ColorsService.creditColor,
       },
       {
         'icon': MdiIcons.accountCash,
         'title': 'Dinheiro',
-        'color': Colors.green,
+        'color': ColorsService.moneyColor,
       },
       {
         'icon': MdiIcons.qrcode,
         'title': 'PIX',
-        'color': Colors.blueAccent,
+        'color': ColorsService.pixColor,
       },
     ];
   }

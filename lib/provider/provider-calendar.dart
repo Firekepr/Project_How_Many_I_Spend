@@ -18,4 +18,11 @@ class ProviderCalendar extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<CalendarItems> _dayListItem = [];
+  List<CalendarItems> get dayListItem => _dayListItem;
+  setCalendarDayListItems(List<CalendarItems> receiveDayListItem) {
+    _dayListItem = receiveDayListItem;
+    notifyListeners();
+  }
+
 }

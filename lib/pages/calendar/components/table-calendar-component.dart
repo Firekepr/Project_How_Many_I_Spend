@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:how_many_i_spend/services/colors-service.dart';
 import 'package:how_many_i_spend/services/utils-service.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../styles/custom-colors.dart';
 
 class TableCalendarComponent extends StatelessWidget {
   final Map<DateTime, List<dynamic>> events;
@@ -12,6 +13,7 @@ class TableCalendarComponent extends StatelessWidget {
   final void Function(DateTime selectDay, DateTime focusDay) onDayLongPressed;
   final void Function(DateTime firstDay) onChangeMonth;
   final bool minSize;
+  final bool isLightTheme;
 
   const TableCalendarComponent({
     Key? key,
@@ -22,6 +24,7 @@ class TableCalendarComponent extends StatelessWidget {
     required this.onChangeMonth,
     required this.onDayLongPressed,
     required this.minSize,
+    required this.isLightTheme,
   }) : super(key: key);
 
   @override
@@ -62,10 +65,10 @@ class TableCalendarComponent extends StatelessWidget {
             if (events.isNotEmpty) {
               final UtilsService _utils = UtilsService();
 
-              Color colorDebit = ColorsService.deepRedScale;
-              Color colorCredit = Colors.orange;
-              Color colorMoney = Colors.green;
-              Color colorPix = ColorsService.deepBlueScale;
+              Color colorDebit = ColorsService.debitColor;
+              Color colorCredit = ColorsService.creditColor;
+              Color colorMoney = ColorsService.moneyColor;
+              Color colorPix = ColorsService.pixColor;
 
               int debitItem = 0;
               int itemCredit = 0;
@@ -73,11 +76,11 @@ class TableCalendarComponent extends StatelessWidget {
               int itemPix = 0;
 
               for (var element in events) {
-                if (element.type == 'Débito') {
+                if (element.type == 'Débito' || element.type == 'Debit') {
                   debitItem += 1;
-                } else if (element.type == 'Crédito') {
+                } else if (element.type == 'Crédito' || element.type == 'Credit') {
                   itemCredit += 1;
-                } else if (element.type == 'Dinheiro') {
+                } else if (element.type == 'Dinheiro' || element.type == 'Money') {
                   itemMoney += 1;
                 }  else {
                   itemPix += 1;
@@ -109,6 +112,7 @@ class TableCalendarComponent extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: item.length,
+              itemExtent: 14.0,
               itemBuilder: (context, index) {
                 Color text = Colors.white;
 
@@ -147,6 +151,7 @@ class TableCalendarComponent extends StatelessWidget {
       pageAnimationEnabled: true,
       daysOfWeekVisible: true,
 
+      //Header like desember and month buttons
       headerStyle: HeaderStyle(
         titleTextStyle: const TextStyle(color: Colors.white),
         titleTextFormatter: (date, locale) => _getHeaderTitle(date, locale),
@@ -158,8 +163,10 @@ class TableCalendarComponent extends StatelessWidget {
         rightChevronVisible: true,
         formatButtonShowsNext: true,
 
-        decoration: const BoxDecoration(
-          color: Colors.lightGreen,
+        decoration: BoxDecoration(
+          color: isLightTheme
+              ? Theme.of(context).backgroundColor
+              : Theme.of(context).cardTheme.color,
           // borderRadius: BorderRadius.only(
           //     topLeft: Radius.circular(10),
           //     topRight: Radius.circular(10),
@@ -183,24 +190,48 @@ class TableCalendarComponent extends StatelessWidget {
 
       calendarStyle: CalendarStyle(
 
-        weekendTextStyle: const TextStyle(color: Colors.red),
-        cellPadding: const EdgeInsets.only(top: 0.0),
+        //=================================================//
 
-
-        outsideDaysVisible: false,
+        //If false will turn of the today color and cricle
         isTodayHighlighted: true,
 
-        selectedTextStyle: const TextStyle(color: Colors.white),
-        selectedDecoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.green,
-        ),
+        //Today number style / color
+        todayTextStyle: TextStyle(color: Theme.of(context).primaryColor),
 
-        todayTextStyle: const TextStyle(color: Colors.black),
+        //Today circle decoration
         todayDecoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.black),
+          border: Border.all(color: Theme.of(context).primaryColor),
         ),
+
+        //=================================================//
+
+
+        //=================================================//
+
+        //Selected day number color
+        selectedTextStyle: const TextStyle(color: Colors.white),
+
+        //Selected day circle highlight
+        selectedDecoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.cyan,
+        ),
+
+        //Weekend day number color
+        weekendTextStyle: const TextStyle(color: Colors.red),
+
+        //=================================================//
+
+        //Week number style
+        defaultTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+
+        //Adjust number padding
+        cellPadding: const EdgeInsets.only(top: 0.0),
+
+        //If false will hide previous month days
+        outsideDaysVisible: false,
+
       ),
 
       daysOfWeekStyle: DaysOfWeekStyle(
