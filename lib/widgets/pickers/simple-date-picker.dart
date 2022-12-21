@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:how_many_i_spend/services/colors-service.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../styles/custom-colors.dart';
 
 
 class SimpleDatePicker extends StatefulWidget {

@@ -1,9 +1,8 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:how_many_i_spend/styles/custom-colors.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../services/colors-service.dart';
 
 class FormBorderTextField extends StatefulWidget {
   final String hintText;
