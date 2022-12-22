@@ -14,6 +14,7 @@ class TableCalendarComponent extends StatelessWidget {
   final void Function(DateTime firstDay) onChangeMonth;
   final bool minSize;
   final bool isLightTheme;
+  final bool simpleCalendar;
 
   const TableCalendarComponent({
     Key? key,
@@ -25,6 +26,7 @@ class TableCalendarComponent extends StatelessWidget {
     required this.onDayLongPressed,
     required this.minSize,
     required this.isLightTheme,
+    required this.simpleCalendar,
   }) : super(key: key);
 
   @override
@@ -74,9 +76,12 @@ class TableCalendarComponent extends StatelessWidget {
               int itemCredit = 0;
               int itemMoney = 0;
               int itemPix = 0;
+              int simpleItem = 0;
 
               for (var element in events) {
-                if (element.type == 'Débito' || element.type == 'Debit') {
+                if (simpleCalendar) {
+                  simpleItem = 1;
+                } else if (element.type == 'Débito' || element.type == 'Debit') {
                   debitItem += 1;
                 } else if (element.type == 'Crédito' || element.type == 'Credit') {
                   itemCredit += 1;
@@ -106,6 +111,11 @@ class TableCalendarComponent extends StatelessWidget {
                 item.add(itemPix);
                 itemColor.add(colorPix);
               }
+
+              if (simpleItem > 0) {
+                item.add(simpleItem);
+                itemColor.add(Colors.red);
+              }
             }
 
             return ListView.builder(
@@ -123,23 +133,20 @@ class TableCalendarComponent extends StatelessWidget {
 
                 return Container(
                   alignment: Alignment.center,
-                  margin:  minSize
-                      ? const EdgeInsets.only(top: 28.0)
-                      : const EdgeInsets.only(top: 32.0),
+                  margin: const EdgeInsets.only(top: 32.0),
+                  padding: const EdgeInsets.all(0.5),
 
-                  padding: minSize
-                      ? const EdgeInsets.only(bottom: 4)
-                      : const EdgeInsets.all(0.5),
-
-                  width: minSize ? 12 : 15,
-                  height: minSize ? 28 : 20,
+                  width: simpleCalendar ? 12 : 15,
+                  height: simpleCalendar ? 28 : 20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: itemColor[index],
                   ),
-                  child: Text(
-                    item[index].toString(),
-                    style: TextStyle(color: text, fontSize: 14),
+                  child: simpleCalendar
+                      ? Container()
+                      : Text(
+                          item[index].toString(),
+                          style: TextStyle(color: text, fontSize: 14),
                   ),
                 );
               },

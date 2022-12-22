@@ -32,6 +32,7 @@ class _CalendarState extends State<Calendar> {
           onPressed: () {
             // _cS.addNewEventModal(context, null);
             _cS.updateTheme();
+            // _cS.updateCalendar();
           },
         ),
         body: Column(
@@ -45,6 +46,7 @@ class _CalendarState extends State<Calendar> {
               onDayLongPressed: _onLongDayPressed,
               minSize: false,
               isLightTheme: system.theme,
+              simpleCalendar: system.simpleCalendar,
             ),
 
             SimpleDivisor(

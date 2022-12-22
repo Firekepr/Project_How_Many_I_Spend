@@ -8,4 +8,11 @@ class ProviderSystem extends ChangeNotifier {
     _theme = handle;
     notifyListeners();
   }
+
+  bool _simpleCalendar = true;
+  bool get simpleCalendar => _simpleCalendar;
+  setCalendarStyle(bool handle) {
+    _simpleCalendar = handle;
+    notifyListeners();
+  }
 }

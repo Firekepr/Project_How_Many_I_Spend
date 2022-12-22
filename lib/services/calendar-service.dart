@@ -108,4 +108,9 @@ class CalendarService {
     ProviderSystem provider = Provider.of<ProviderSystem>(GlobalContextKey.get()!, listen: false);
     provider.setTheme(!provider.theme);
   }
+
+  updateCalendar() {
+    ProviderSystem provider = Provider.of<ProviderSystem>(GlobalContextKey.get()!, listen: false);
+    provider.setCalendarStyle(!provider.simpleCalendar);
+  }
 }
