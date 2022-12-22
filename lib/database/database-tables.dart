@@ -13,20 +13,17 @@ class DataBaseTables {
     spending text
   ) ''';
 
-  static const String currentUser = ''' 
-  CREATE TABLE mov_user(
-    id integer PRIMARY KEY AUTOINCREMENT,
-    salary text DEFAULT '',
-    dark_theme integer DEFAULT 0,
-    show_notification integer DEFAULT 0,
-    auto_complete_parcel integer DEFAULT 0,
-    user_photo text DEFAULT ''
-  )''';
-
   static const String systemConfiguration = '''
-  CREATE TABLE mov_system(
+  CREATE TABLE mov_user(
   id integer PRIMARY KEY AUTOINCREMENT,
-  first_time integer DEFAULT 0
+  first_name text DEFAULT '',
+  salary text DEFAULT '',
+  user_photo text DEFAULT '',
+  password text DEFAULT '',
+  show_notification integer DEFAULT 0,
+  dark_theme integer DEFAULT 0,
+  simple_calendar integer DEFAULT 0,
+  first_time integer DEFAULT 1
   )''';
 
 }

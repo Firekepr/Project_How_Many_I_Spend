@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/pages/home/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:how_many_i_spend/pages/load-page.dart';
+import 'package:how_many_i_spend/pages/tutorial/new-user.dart';
 import 'package:how_many_i_spend/provider/provider-system.dart';
 import 'package:how_many_i_spend/services/app_theme_service.dart';
 import 'package:how_many_i_spend/services/global-context.dart';
+import 'package:how_many_i_spend/services/system-service.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -28,8 +31,8 @@ class MyApp extends StatelessWidget {
             Locale('pt', ''),
           ],
 
-          theme: val.theme ? AppTheme.lightTheme : AppTheme.darkTheme,
-          home: const Home(),
+          theme: val.theme ? AppTheme.darkTheme : AppTheme.lightTheme,
+          home: const LoadPage(),
         );
       },
     );

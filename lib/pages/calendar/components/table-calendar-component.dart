@@ -172,8 +172,8 @@ class TableCalendarComponent extends StatelessWidget {
 
         decoration: BoxDecoration(
           color: isLightTheme
-              ? Theme.of(context).backgroundColor
-              : Theme.of(context).cardTheme.color,
+              ? Theme.of(context).cardTheme.color
+              : Theme.of(context).backgroundColor,
           // borderRadius: BorderRadius.only(
           //     topLeft: Radius.circular(10),
           //     topRight: Radius.circular(10),

@@ -19,4 +19,12 @@ class UtilsService{
     return formatter.parse(param + ' ' + formatter2.format(DateTime.now()));
   }
 
+  int boolToBinary(bool isTrue) {
+    if(isTrue) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
 }

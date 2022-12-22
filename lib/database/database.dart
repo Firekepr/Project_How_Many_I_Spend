@@ -35,7 +35,6 @@ class DatabaseHelper {
   Future<void> _createTables(Database db) async {
     List<String> tables = [
       DataBaseTables.calendarEvents,
-      DataBaseTables.currentUser,
       DataBaseTables.systemConfiguration,
     ];
 
