@@ -7,7 +7,6 @@ import 'package:how_many_i_spend/provider/provider-calendar.dart';
 import 'package:how_many_i_spend/provider/provider-system.dart';
 import 'package:how_many_i_spend/widgets/dialogs/calendar-add-dialog.dart';
 import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import 'global-context.dart';
@@ -28,12 +27,12 @@ class CalendarService {
 
   Future<void> addNewEvent(Map<String, dynamic> formMap) async {
     CalendarItems item = CalendarItems(
-          date: formMap['date'].toString().substring(0, 10),
-          type: formMap['type'],
-          description: formMap['description'],
-          spending: formMap['spending'],
-          parcel: formMap['parcel'] ?? '',
-          local: formMap['local'] ?? '',
+      date: formMap['date'].toString().substring(0, 10),
+      type: formMap['type'],
+      description: formMap['description'],
+      spending: formMap['spending'],
+      parcel: formMap['parcel'] ?? '',
+      local: formMap['local'] ?? '',
     );
 
     await _db.insert('mov_calendar_items', item.toMap());
@@ -60,12 +59,12 @@ class CalendarService {
       for (var value in dates) value : getDayCalendar(value)
     };
 
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
+    WidgetsBinding.instance?.addPostFrameCallback((_) =>
         getProvider(GlobalContextKey.get()!).setEventListResult(result));
   }
 
   Future<void> updateCalendarEventListDay() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
+    WidgetsBinding.instance?.addPostFrameCallback((_) =>
         getProvider(GlobalContextKey.get()!).setCalendarDayListItems(getDayCalendar(DateTime.now())));
   }
 

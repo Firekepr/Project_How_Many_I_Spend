@@ -41,9 +41,10 @@ dependencies:
   intl: ^0.17.0 #https://pub.dev/packages/intl
   page_transition: ^2.0.9 #https://pub.dev/packages/page_transition
   provider: ^6.0.3 # https://pub.dev/packages/provider
-  modal_bottom_sheet: ^2.1.2
+  modal_bottom_sheet: 2.0.0
   brasil_fields: ^1.8.1 #https://pub.dev/packages/brasil_fields
-  reactive_forms: ^14.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
+  reactive_forms: 12.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
+  loading_animation_widget: ^1.1.0+5 #https://pub.dev/packages/loading_animation_widget
 
 dev_dependencies:
   flutter_test:
