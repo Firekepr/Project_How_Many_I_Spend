@@ -35,7 +35,6 @@ class DatabaseHelper {
   Future<void> _createTables(Database db) async {
     List<String> tables = [
       DataBaseTables.calendarEvents,
-      DataBaseTables.currentUser,
       DataBaseTables.systemConfiguration,
     ];
 
@@ -65,5 +64,19 @@ class DatabaseHelper {
   Future<int> delete(String sql) async {
     Database db = await database;
     return await db.rawDelete(sql);
+  }
+
+  Future<void> resetTables() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, 'how_many_spend.db');
+
+    Database db = await database;
+
+    await deleteDatabase(path);
+
+    if (db.isOpen) {
+      _dataBase = null;
+      await db.close();
+    }
   }
 }

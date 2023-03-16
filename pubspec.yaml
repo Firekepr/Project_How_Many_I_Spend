@@ -41,11 +41,15 @@ dependencies:
   intl: ^0.17.0 #https://pub.dev/packages/intl
   page_transition: ^2.0.9 #https://pub.dev/packages/page_transition
   provider: ^6.0.3 # https://pub.dev/packages/provider
+  modal_bottom_sheet: ^2.1.2
+  brasil_fields: ^1.8.1 #https://pub.dev/packages/brasil_fields
+  reactive_forms: ^14.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
