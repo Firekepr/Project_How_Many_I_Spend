@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:how_many_i_spend/global.dart';
 import 'package:how_many_i_spend/strings/system-strings.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../../../provider/pages-service.dart';
 import '../../configurations/configurations.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -21,7 +19,7 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            leading: const Icon(MdiIcons.cogOutline),
+            leading: Icon(MdiIcons.cogOutline),
             title: const Text(SystemStrings.configurations),
             onTap: (){
               Navigator.of(context).pop();

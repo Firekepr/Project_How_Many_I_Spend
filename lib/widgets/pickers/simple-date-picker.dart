@@ -69,7 +69,7 @@ class _SimpleDatePickerState extends State<SimpleDatePicker> {
               ),
               child: Row(
                 children: [
-                  const Icon(
+                  Icon(
                     MdiIcons.calendarCursor,
                     color: ColorsService.graphiteColor,
                   ),

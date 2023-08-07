@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: '>=3.1.0-63.0.dev <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,17 +33,17 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  sqflite: ^2.0.2 #  https://pub:dev/packages/sqflite:
-  path_provider: ^2.0.11 #  https://pub:dev/packages/path_provider:
-  material_design_icons_flutter: ^5.0.6996 # https://pub.dev/packages/material_design_icons_flutter
-  table_calendar: ^3.0.6 #https://pub.dev/packages/table_calendar
-  intl: ^0.17.0 #https://pub.dev/packages/intl
-  page_transition: ^2.0.9 #https://pub.dev/packages/page_transition
-  provider: ^6.0.3 # https://pub.dev/packages/provider
-  modal_bottom_sheet: 2.0.0
   brasil_fields: ^1.8.1 #https://pub.dev/packages/brasil_fields
-  reactive_forms: 12.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
+  cupertino_icons: ^1.0.2
+  material_design_icons_flutter: ^7.0.7296 # https://pub.dev/packages/material_design_icons_flutter
+  intl: ^0.18.0 #https://pub.dev/packages/intl
+  page_transition: ^2.0.9 #https://pub.dev/packages/page_transition
+  modal_bottom_sheet: 2.0.0
+  path_provider: ^2.0.15 #  https://pub:dev/packages/path_provider:
+  provider: ^6.0.5 # https://pub.dev/packages/provider
+  table_calendar: ^3.0.9 #https://pub.dev/packages/table_calendar
+  reactive_forms: 15.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
+  sqflite: ^2.2.8+4 #  https://pub:dev/packages/sqflite:
   loading_animation_widget: ^1.1.0+5 #https://pub.dev/packages/loading_animation_widget
 
 dev_dependencies:
