@@ -11,7 +11,7 @@ class Initialize extends StatefulWidget {
 
 class _InitializeState extends State<Initialize> {
   PageController _pageController = PageController(keepPage: false);
-  List<int> _pageStack = [];
+  List<int> pageStack = [];
   List<Widget> _pageList = [];
 
   @override
@@ -26,7 +26,7 @@ class _InitializeState extends State<Initialize> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_pageStack.length > 1) {
+        if (pageStack.length > 1) {
           _goBack();
         }
         return false;
@@ -37,12 +37,12 @@ class _InitializeState extends State<Initialize> {
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: (page) {
-            if (_pageStack.isEmpty || _pageStack.last != page) {
+            if (pageStack.isEmpty || pageStack.last != page) {
               setState(() {
-                if (_pageStack.isEmpty) {
-                  _pageStack.add(_pageController.initialPage);
+                if (pageStack.isEmpty) {
+                  pageStack.add(_pageController.initialPage);
                 }
-                _pageStack.add(page);
+                pageStack.add(page);
               });
             }
           },
@@ -54,8 +54,8 @@ class _InitializeState extends State<Initialize> {
 
   void _goBack() {
     setState(() {
-      _pageStack.removeLast();
-      _pageController.jumpToPage(_pageStack.last);
+      pageStack.removeLast();
+      _pageController.jumpToPage(pageStack.last);
     });
     FocusScopeNode currentFocus = FocusScope.of(context);
 

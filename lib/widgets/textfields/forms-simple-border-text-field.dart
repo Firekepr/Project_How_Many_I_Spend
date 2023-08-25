@@ -40,7 +40,7 @@ class _FormBorderTextFieldState extends State<FormBorderTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding ?? EdgeInsets.only(top: 4.0),
+      padding: widget.padding ?? const EdgeInsets.only(top: 4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -77,7 +77,7 @@ class _FormBorderTextFieldState extends State<FormBorderTextField> {
                 expands: false,
                 maxLines: 5,
                 minLines: 1,
-                style: const TextStyle(color: Colors.black,),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 inputFormatters: widget.formatMoney
                     ? <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly,

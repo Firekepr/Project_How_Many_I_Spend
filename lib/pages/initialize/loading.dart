@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:how_many_i_spend/styles/custom-text-styles.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingScreen extends StatelessWidget {
@@ -7,16 +8,24 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LoadingAnimationWidget.inkDrop(
-              color: Colors.red,
-              size: 50
-          ),
-          const SizedBox(height: 16),
-          const Text('Iniciando...'),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LoadingAnimationWidget.inkDrop(
+                color: Colors.red,
+                size: 50
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Iniciando...',
+              style: CustomFonts.custom(
+                size: FontSize.middleBig,
+                customColor: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

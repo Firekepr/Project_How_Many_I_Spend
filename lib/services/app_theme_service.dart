@@ -37,6 +37,7 @@ class AppTheme {
       ),
 
       fontFamily: 'AlegreyaSans',
+      textTheme: const TextTheme(),
       unselectedWidgetColor: Colors.white,
       hoverColor: Colors.blueGrey[900],// input background color
       splashColor: Colors.deepOrange, //Color icon bottom bar
