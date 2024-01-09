@@ -15,6 +15,7 @@ class FormBorderTextField extends StatefulWidget {
   final double? labelSize;
   final bool? readOnly;
   final EdgeInsetsGeometry? padding;
+  final void Function(dynamic value)? onChange;
 
   const FormBorderTextField({
     Key? key,
@@ -28,6 +29,7 @@ class FormBorderTextField extends StatefulWidget {
     this.labelSize,
     this.readOnly,
     this.padding,
+    this.onChange,
   }) : super(key: key);
 
   @override
@@ -85,6 +87,11 @@ class _FormBorderTextFieldState extends State<FormBorderTextField> {
                       ]
                     : null,
                 textAlign: TextAlign.left,
+                onChanged: (value) {
+                  if (widget.onChange != null) {
+                    widget.onChange!(value);
+                  }
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   errorStyle: const TextStyle(height: 0.01, color: Colors.transparent),

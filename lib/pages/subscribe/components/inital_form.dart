@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/provider/provider-system.dart';
+import 'package:how_many_i_spend/strings/system-strings.dart';
 import 'package:how_many_i_spend/styles/custom-text-styles.dart';
-import 'package:how_many_i_spend/widgets/textfields/number_form_field.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -11,8 +11,9 @@ import '../../../widgets/textfields/forms-simple-border-text-field.dart';
 class SubscribeForm extends StatelessWidget {
   final FormGroup form;
   final int step;
-  final Widget Function() buttons;
+  final Widget buttons;
   final void Function() onChangeTheme;
+  final void Function() onChange;
 
   const SubscribeForm({
     super.key,
@@ -20,6 +21,7 @@ class SubscribeForm extends StatelessWidget {
     required this.step,
     required this.buttons,
     required this.onChangeTheme,
+    required this.onChange,
   });
 
   @override
@@ -30,7 +32,7 @@ class SubscribeForm extends StatelessWidget {
       child: Column(
         children: [
           getBody(context),
-          buttons(),
+          buttons,
         ],
       ),
     );
@@ -43,16 +45,17 @@ class SubscribeForm extends StatelessWidget {
     if (step == 0) {
       return Column(
         children: [
-          Text("Qual é seu nome ou apelido?", style: style),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
+          Text(SubscribeStrings.stepOne, style: style),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: FormBorderTextField(
               formControlName: 'first_name',
               label: '',
               hintText: '',
               hideDecoration: false,
               formatMoney: false,
-              padding: EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              onChange: (value) => onChange(),
             ),
           ),
         ],
@@ -61,27 +64,22 @@ class SubscribeForm extends StatelessWidget {
       return Column(
         children: [
           Text(
-            "Para poder lhe ajudar, informe quanto em média você recebe por mês",
+            SubscribeStrings.stepTwo,
             style: style,
             textAlign: TextAlign.center,
           ),
-          const FormBorderTextField(
+          FormBorderTextField(
             formControlName: 'salary',
             label: '',
             hintText: 'R\$: 1.000,00',
             hideDecoration: false,
             formatMoney: true,
-            padding: EdgeInsets.symmetric(vertical: 10.0),
+            inputType: TextInputType.number,
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            onChange: (value) => onChange(),
           ),
-          // NumberFormField(
-          //   form: form,
-          //   formatMoney: true,
-          //   hideDecoration: false,
-          //   hintText: 'R\$: 1.000,00',
-          //   formControlName: 'salary',
-          // ),
           Text(
-            "(Não se preocupe, esse segredo ficará entre nós dois)",
+            SubscribeStrings.stepTwoHint,
             style: styleLittle,
             textAlign: TextAlign.center,
           ),
@@ -91,7 +89,7 @@ class SubscribeForm extends StatelessWidget {
       return Consumer<ProviderSystem>(builder: (BuildContext calendarContext, ProviderSystem system, Widget? child) {
         return Column(
           children: [
-            Text("Selecione um tema:", style: style),
+            Text(SubscribeStrings.stepThree, style: style),
             IconButton(
               splashColor: Colors.transparent,
               onPressed: onChangeTheme,

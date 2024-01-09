@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/pages/home/home.dart';
 import 'package:how_many_i_spend/pages/subscribe/components/inital_form.dart';
 import 'package:how_many_i_spend/services/theme_service.dart';
+import 'package:how_many_i_spend/strings/system-strings.dart';
 import 'package:how_many_i_spend/styles/custom-text-styles.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -58,14 +59,21 @@ class _InitialConfigurationsState extends State<InitialConfigurations> {
             : SubscribeForm(
                 form: _form,
                 step: step,
-                buttons: buttons,
+                buttons: buttons(),
                 onChangeTheme: () => _themeS.updateTheme(context),
+                onChange: () => setState(() {}),
             )
       ],
     );
   }
 
   Widget buttons() {
+    bool isRequired = step == 0
+        ? _form.control('first_name').invalid
+        : step == 1
+        ? _form.control('salary').invalid
+        : false;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -75,12 +83,12 @@ class _InitialConfigurationsState extends State<InitialConfigurations> {
             onPressed: step == 0
                 ? null
                 : () {
-                    if(step == 1 && _form.control('salary').value == null) _form.control('salary').value = 'a';
+                  if(step == 1 && _form.control('salary').value == null) _form.control('salary').value = 'a';
 
-                    setState(() {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      step--;
-                    });
+                  setState(() {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    step--;
+                  });
                 },
             icon: Icon(
               MdiIcons.chevronLeft,
@@ -89,21 +97,23 @@ class _InitialConfigurationsState extends State<InitialConfigurations> {
           ),
         ),
 
-        IconButton(
-          onPressed: () {
-            if(_form.valid) {
-              if (step >=  1) return _already();
+        Opacity(
+          opacity: isRequired ? 0.3 : 1,
+          child: IconButton(
+            onPressed: isRequired ? null : () {
+              if (step >=  2) return _already();
               if (step == 0 && _form.control('salary').value == 'a') _form.control('salary').value = null;
 
               setState(() {
                 FocusScope.of(context).requestFocus(FocusNode());
                 step++;
               });
-            }
-          },
-          icon: Icon(
-            MdiIcons.chevronRight,
-            color: Theme.of(context).primaryColor,
+            },
+
+            icon: Icon(
+              MdiIcons.chevronRight,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
       ],
@@ -112,22 +122,20 @@ class _InitialConfigurationsState extends State<InitialConfigurations> {
 
   void _stepper() {
     _fade(1);
-    _handleMessage(2, 'Bem vindo ao How many i spend!');
+    _handleMessage(2, SubscribeStrings.welcome);
     _fade(3);
-    _handleMessage(4, 'Vamos começar?');
+    _handleMessage(4, SubscribeStrings.begin);
     _fade(5);
     Timer(const Duration(seconds: 6), () => setState(() =>_visible = false));
   }
 
   void _already() {
-    setState(() {
-      _visible = true;
-    });
+    setState(() =>_visible = true);
 
-    _handleMessage(0, 'Tudo pronto');
+    _handleMessage(0, SubscribeStrings.already);
     _fade(1);
-    _handleMessage(2, 'Lembrando que será possível alterar qualquer informação dentro das configurações');
-    Timer(const Duration(seconds: 3), () =>
+    _handleMessage(2, SubscribeStrings.remember);
+    Timer(const Duration(seconds: 4), () =>
         Navigator.pushReplacement(context,
             MaterialPageRoute(
                 builder: (BuildContext context) => const Home(),
