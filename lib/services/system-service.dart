@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:how_many_i_spend/database/database.dart';
+import 'package:how_many_i_spend/provider/PHelper.dart';
 import 'package:how_many_i_spend/provider/pages-service.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 
 import '../database/interfaces/system.dart';
 import '../pages/home/home.dart';
-import '../provider/provider-system.dart';
-import 'global-context.dart';
 
 class SystemService {
 
@@ -28,7 +26,7 @@ class SystemService {
 
     await _db.insert('mov_user', system.toMap());
 
-    getProvider(GlobalContextKey.get()!).setSystemConfigurations(system);
+    PHelper.system().setSystemConfigurations(system);
   }
 
   Future<void> loadSystem(BuildContext context, PageController controller) async {
@@ -36,14 +34,17 @@ class SystemService {
 
     List<Map<String, dynamic>> response = await _db.getSQLSelect(sql);
 
-    SystemInterface system;
+    SystemInterface interface;
 
     if(response.isNotEmpty) {
-      system = SystemInterface.fromMap(response[0]);
+      interface = SystemInterface.fromMap(response[0]);
 
     } else {
-      system = SystemInterface(
-        dark_theme: false,
+      final Brightness brightness = MediaQuery.of(context).platformBrightness;
+      final bool isDarkMode = brightness == Brightness.dark;
+
+      interface = SystemInterface(
+        dark_theme: isDarkMode,
         first_time: true,
         show_notification: true,
         simple_calendar: true,
@@ -54,26 +55,25 @@ class SystemService {
       );
     }
 
-    getProvider(GlobalContextKey.get()!).setSystemConfigurations(system);
-    getProvider(GlobalContextKey.get()!).setTheme(system.dark_theme);
-    getProvider(GlobalContextKey.get()!).setCalendarStyle(system.simple_calendar);
+    final system = PHelper.system(context: context);
 
-    if (system.first_time) {
+    system.setSystemConfigurations(interface);
+    system.setTheme(interface.dark_theme);
+    system.setCalendarStyle(interface.simple_calendar);
+
+    if (interface.first_time) {
       controller.jumpToPage(AppInitialPages.initialConfigurations);
 
     } else {
       Navigator.push(
-          context,
-          PageTransition(
-              type: PageTransitionType.rightToLeft,
-              duration: const Duration(milliseconds: 600),
-              reverseDuration: const Duration(milliseconds: 600),
-              child: const Home()));
+        context,
+        PageTransition(
+            type: PageTransitionType.rightToLeft,
+            duration: const Duration(milliseconds: 600),
+            reverseDuration: const Duration(milliseconds: 600),
+            child: const Home(),
+        ),
+      );
     }
-
-  }
-
-  ProviderSystem getProvider(BuildContext context) {
-    return Provider.of<ProviderSystem>(context, listen: false);
   }
 }
