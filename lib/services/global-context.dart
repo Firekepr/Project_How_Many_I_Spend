@@ -5,7 +5,5 @@ class GlobalContextKey {
 
   static GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
 
-  static BuildContext? get(){
-    return navigatorKey.currentContext;
-  }
+  static BuildContext get() => navigatorKey.currentContext!;
 }
