@@ -24,14 +24,8 @@ class _InitializeState extends State<Initialize> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (pageStack.length > 1) {
-          _goBack();
-        }
-        return false;
-
-      },
+    return PopScope(
+      canPop: pageStack.length > 1,
       child: Scaffold(
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
@@ -65,8 +59,6 @@ class _InitializeState extends State<Initialize> {
   }
 
   Future<void> _initializeApp() async {
-    final SystemService _system = SystemService();
-
-    await _system.loadSystem(context, _pageController);
+    await SystemService().loadSystem(context, _pageController);
   }
 }

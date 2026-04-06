@@ -44,7 +44,10 @@ dependencies:
   table_calendar: ^3.0.9 #https://pub.dev/packages/table_calendar
   reactive_forms: 15.0.0 #https://pub.dev/packages/reactive_forms/versions/14.0.0
   sqflite: ^2.2.8+4 #  https://pub:dev/packages/sqflite:
-  loading_animation_widget: ^1.1.0+5 #https://pub.dev/packages/loading_animation_widget
+  loading_animation_widget        : ^1.1.0+5  # https://pub.dev/packages/loading_animation_widget
+  animated_toggle_switch          : ^0.8.5    # https://pub.dev/packages/animated_toggle_switch
+  mobile_scanner                  : ^5.0.0    # https://pub.dev/packages/mobile_scanner
+  http                            : ^1.2.1    # https://pub.dev/packages/http
 
 dev_dependencies:
   flutter_test:

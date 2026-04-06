@@ -23,4 +23,11 @@ class ProviderSystem extends ChangeNotifier {
     _system = configurations;
     notifyListeners();
   }
+
+  String _screenTitle = "Gastos de Hoje";
+  String get screenTitle => _screenTitle;
+  void setScreenTitle(String title) {
+    _screenTitle = title;
+    notifyListeners();
+  }
 }

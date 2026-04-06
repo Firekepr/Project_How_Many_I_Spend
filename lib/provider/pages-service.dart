@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/pages/calendar/calendar.dart';
+import 'package:how_many_i_spend/pages/main_home/main_home.dart';
 import 'package:how_many_i_spend/pages/subscribe/initial_configurations.dart';
 import 'package:how_many_i_spend/pages/initialize/loading.dart';
 
@@ -7,6 +8,7 @@ import '../pages/configurations/configurations.dart';
 
 List<Widget> getPages(PageController pageController, void Function() goBack) {
   return [
+    const MainHome(),
     const Calendar(),
     const ConfigurationsPage(),
   ];

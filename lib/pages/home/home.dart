@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:how_many_i_spend/pages/home/components/drawer.dart';
+import 'package:how_many_i_spend/pages/home/components/my_app_bar.dart';
 import 'package:how_many_i_spend/services/calendar-service.dart';
 import 'package:how_many_i_spend/provider/pages-service.dart';
 
@@ -38,24 +39,15 @@ class _HomeState extends State<Home> {
       },
       child: Scaffold(
         key: GlobalContextKey.drawerKey,
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () => GlobalContextKey.drawerKey.currentState?.openDrawer(),
-            child: const Icon(Icons.menu),
-          ),
-        ),
-        drawer: AppDrawer(
-          pageController: _pageController,
-        ),
+        appBar: const MyAppBar(),
+        drawer: AppDrawer(pageController: _pageController),
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: (page) {
             if (_pageStack.isEmpty || _pageStack.last != page) {
               setState(() {
-                if (_pageStack.isEmpty) {
-                  _pageStack.add(_pageController.initialPage);
-                }
+                if (_pageStack.isEmpty) _pageStack.add(_pageController.initialPage);
                 _pageStack.add(page);
               });
             }

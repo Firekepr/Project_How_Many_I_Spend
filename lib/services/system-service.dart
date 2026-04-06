@@ -61,10 +61,10 @@ class SystemService {
     system.setTheme(interface.dark_theme);
     system.setCalendarStyle(interface.simple_calendar);
 
-    if (interface.first_time) {
-      controller.jumpToPage(AppInitialPages.initialConfigurations);
-
-    } else {
+    // if (interface.first_time) {
+    //   controller.jumpToPage(AppInitialPages.initialConfigurations);
+    //
+    // } else {
       Navigator.push(
         context,
         PageTransition(
@@ -74,6 +74,6 @@ class SystemService {
             child: const Home(),
         ),
       );
-    }
+    // }
   }
 }
